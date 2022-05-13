@@ -2,11 +2,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:NativeTracker.ViewModels"
+             xmlns:cv="clr-namespace:NativeTracker.Converters"
              xmlns:map="clr-namespace:Avalonia.OpenStreetMap.Control.Map;assembly=Avalonia.OpenStreetMap"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NativeTracker.Views.MapDetailsView">
+    <UserControl.DataContext>
+        <viewModels:MapDetailsViewModel />
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <cv:MapPointToMapLineConverter x:Key="MapPointToMapLineConverter">
+            <cv:MapPointToMapLineConverter.Pen>
+                <Pen Brush="Red" Thickness="5" />
+            </cv:MapPointToMapLineConverter.Pen>
+        </cv:MapPointToMapLineConverter>
+    </UserControl.Resources>
     <Panel>
-        <map:MapControl Zoom="5"
-                        Center="37.617627, 55.755829" />
+        <map:MapControl Zoom="5" x:Name="MapControl"
+                        Center="37.617627, 55.755829"
+                        Shapes="{Binding Path=Points,
+                        Converter={StaticResource MapPointToMapLineConverter}}" />
+        <!-- <ListBox Items="{Binding Points, Converter={StaticResource  -->
+        <!-- MapPointToMapLineConverter}}" /> -->
+        <map:MapPanel MapContext="{Binding #MapControl}">
+            <!-- <Image Source="/Assets/lord.jpg" Width="5" Height="5" -->
+            <!--        map:MapPanel.MapPosition="37.641169, 55.730459"/> -->
+        </map:MapPanel>
     </Panel>
 </UserControl>
