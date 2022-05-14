@@ -5,6 +5,7 @@
              xmlns:viewModels="clr-namespace:NativeTracker.ViewModels"
              xmlns:cv="clr-namespace:NativeTracker.Converters"
              xmlns:map="clr-namespace:Avalonia.OpenStreetMap.Control.Map;assembly=Avalonia.OpenStreetMap"
+             xmlns:views="clr-namespace:NativeTracker.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NativeTracker.Views.MapDetailsView">
     <UserControl.DataContext>
@@ -18,15 +19,26 @@
         </cv:MapPointToMapLineConverter>
     </UserControl.Resources>
     <Panel>
+        
         <map:MapControl Zoom="5" x:Name="MapControl"
                         Center="37.617627, 55.755829"
                         Shapes="{Binding Path=Points,
                         Converter={StaticResource MapPointToMapLineConverter}}" />
-        <!-- <ListBox Items="{Binding Points, Converter={StaticResource  -->
-        <!-- MapPointToMapLineConverter}}" /> -->
-        <map:MapPanel MapContext="{Binding #MapControl}">
-            <!-- <Image Source="/Assets/lord.jpg" Width="5" Height="5" -->
-            <!--        map:MapPanel.MapPosition="37.641169, 55.730459"/> -->
-        </map:MapPanel>
+        
+        <!-- Vehicle Icons -->
+        <ItemsControl Items="{Binding Vehicles}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <map:MapPanel MapContext="{Binding #MapControl}" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <views:VehicleIcon map:MapPanel.MapPosition="{Binding Position}"
+                                       map:MapPanel.PinPoint="50%, 100%"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        
     </Panel>
 </UserControl>

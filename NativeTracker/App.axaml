@@ -10,5 +10,6 @@
         <FluentTheme Mode="Light"/>
         
         <StyleInclude Source="avares://Avalonia.OpenStreetMap/Control.Map/MapControl.axaml"/>
+        <StyleInclude Source="/Styles/VehicleIcon.axaml"/>
     </Application.Styles>
 </Application>

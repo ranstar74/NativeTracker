@@ -13,19 +13,26 @@ namespace NativeTracker.ViewModels;
 public class MapDetailsViewModel : ViewModelBase
 {
     public AvaloniaList<MapPoint> Points { get; } = new();
-    
+    public AvaloniaList<Vehicle> Vehicles { get; } = new();
+
     private readonly VehicleTracker _tracker = new();
 
     public MapDetailsViewModel()
     {
         //_tracker.TrackVehicle(1, OnUpdate);
 
-        GetRoutePoints();
+        Vehicles.Add(new Vehicle()
+        {
+            Name = "Lada 2109",
+            Position = new MapPoint(37.742141, 55.758013)
+        });
+        this.RaisePropertyChanged(nameof(Vehicles));
+
+        //GetRoutePoints();
     }
 
     private async void GetRoutePoints()
     {
-        
         var request = new RouteRequest()
         {
             RouteOptions = new RouteOptions()
@@ -49,7 +56,8 @@ public class MapDetailsViewModel : ViewModelBase
                 new SimpleWaypoint("3-я Владимирская улица, 8к2"),
                 new SimpleWaypoint("Хабаровская улица, 19к2"),
             },
-            BingMapsKey = "F4EqM7NpwsMAEwrpnNLY~ej6S-BnVhZlwfr1d4Y78mg~AogF2wuNPVeqF9dep6CmCHMHZfG_GeP6r0tpriW_g15Ecp_wdOk01em_Wkqj2_KG"
+            BingMapsKey =
+                "F4EqM7NpwsMAEwrpnNLY~ej6S-BnVhZlwfr1d4Y78mg~AogF2wuNPVeqF9dep6CmCHMHZfG_GeP6r0tpriW_g15Ecp_wdOk01em_Wkqj2_KG"
         };
 
         var responce = await request.Execute();
@@ -65,7 +73,13 @@ public class MapDetailsViewModel : ViewModelBase
     {
         Points.Add(new MapPoint(update.Longitude, update.Latitude));
         Debug.WriteLine(update.Time);
-        
+
         this.RaisePropertyChanged(nameof(Points));
     }
+}
+
+public class Vehicle
+{
+    public string Name { get; set; }
+    public MapPoint Position { get; set; }
 }

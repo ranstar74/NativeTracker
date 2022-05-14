@@ -13,20 +13,20 @@ namespace NativeTracker
         [STAThread]
         public static void Main(string[] args)
         {
-            try
-            {
-                BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-            }
-            catch (Exception e)
-            {
-
-            }
-            finally
-            {
-                // This block is optional. 
-                // Use the finally-block if you need to clean things up or similar
-                //Log.CloseAndFlush();
-            }
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+            // try
+            // {
+            // }
+            // catch (Exception e)
+            // {
+            //
+            // }
+            // finally
+            // {
+            //     // This block is optional. 
+            //     // Use the finally-block if you need to clean things up or similar
+            //     //Log.CloseAndFlush();
+            // }
         }
 
         // Avalonia configuration, don't remove; also used by visual designer.
