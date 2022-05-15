@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:NativeTracker.Views"
-        xmlns:map="clr-namespace:Avalonia.OpenStreetMap.Control.Map;assembly=Avalonia.OpenStreetMap"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="NativeTracker.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="NativeTracker">
-
+    
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
@@ -19,7 +18,9 @@
             <TabItem Header="Map and Details">
                 <views:MapDetailsView />
             </TabItem>
-            <TabItem Header="Assets" />
+            <TabItem Header="Assets">
+                <views:AssetsView />
+            </TabItem>
             <TabItem Header="Dashboard" />
         </TabControl>
     </Panel>
