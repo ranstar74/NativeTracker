@@ -16,6 +16,12 @@ public partial class LoginWindow : Window
 
         var vm = new LoginWindowViewModel();
         DataContext = vm;
+
+        vm.OnSignedIn += () =>
+        {
+            new MainWindow().Show();
+            Close();
+        };
     }
     
     private void InitializeComponent()

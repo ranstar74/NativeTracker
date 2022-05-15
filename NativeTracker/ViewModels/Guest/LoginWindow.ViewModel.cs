@@ -1,4 +1,5 @@
-﻿using nativeTrackerClientService;
+﻿using System;
+using nativeTrackerClientService;
 using ReactiveUI.Fody.Helpers;
 
 namespace NativeTracker.ViewModels.Guest;
@@ -7,19 +8,37 @@ public class LoginWindowViewModel : ViewModel
 {
     [Reactive] public object View { get; set; }
 
-    private readonly SignInViewModel _signInVm;
+    public Action OnSignedIn { get; set; }
+    
+    private SignInViewModel _signInVm;
     private SignUpViewModel _signUpVm;
 
     public LoginWindowViewModel()
     {
-        _signInVm = new SignInViewModel();
-        _signUpVm = new SignUpViewModel();
-
+        CreateSignIn();
+        CreateSignUp();
+        
         // Set SignIn View by default
         View = _signInVm;
+    }
+
+    private void CreateSignIn()
+    {
+        _signInVm = new SignInViewModel();
 
         // Open SignUp View
         _signInVm.OnSignUpRequired += () => View = _signUpVm;
+
+        // Open MainWindow
+        _signInVm.LoginEnd += () =>
+        {
+            OnSignedIn?.Invoke();
+        };
+    }
+
+    private void CreateSignUp()
+    {
+        _signUpVm = new SignUpViewModel();
         
         // Open SignIn View if created
         _signUpVm.LoginEnd += () =>
@@ -30,7 +49,7 @@ public class LoginWindowViewModel : ViewModel
             View = _signInVm;
             
             // Reset view
-            _signUpVm = new SignUpViewModel();
+            CreateSignUp();
         };
         
         // Open SignIn View
@@ -39,7 +58,7 @@ public class LoginWindowViewModel : ViewModel
             View = _signInVm;
             
             // Reset view
-            _signUpVm = new SignUpViewModel();
+            CreateSignUp();
         };
     }
 }
