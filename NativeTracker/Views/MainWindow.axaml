@@ -19,7 +19,7 @@
                 <views:MapDetailsView />
             </TabItem>
             <TabItem Header="Assets">
-                <views:AssetsView />
+                <views:AssetsView/>
             </TabItem>
             <TabItem Header="Dashboard" />
         </TabControl>

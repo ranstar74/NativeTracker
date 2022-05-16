@@ -3,12 +3,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:assets="clr-namespace:NativeTracker.Views.Assets"
+             xmlns:assetsvms="clr-namespace:NativeTracker.ViewModels.Assets"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="NativeTracker.Views.AssetsView">
     <TabControl TabStripPlacement="Left">
+        
         <TabItem Header="Vehicles">
-            <assets:VehiclesView />
+            <assets:VehiclesView>
+                <assets:VehiclesView.DataContext>
+                    <assetsvms:VehicleListViewModel/>
+                </assets:VehiclesView.DataContext>
+            </assets:VehiclesView>
         </TabItem>
+        
         <TabItem Header="Routes">
             
         </TabItem>

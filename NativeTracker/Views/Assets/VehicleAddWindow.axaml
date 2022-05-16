@@ -24,7 +24,7 @@
                     Command="{Binding BrowsePhotoCommand}" />
             <Image DockPanel.Dock="Right"
                    Source="{Binding Photo, 
-                   Converter={StaticResource ByteToImageConverter}}" />
+                   Converter={StaticResource ByteImageConverter}}" />
         </DockPanel>
 
         <WrapPanel HorizontalAlignment="Left">
