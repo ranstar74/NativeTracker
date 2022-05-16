@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using NativeTracker.Models;
 using nativeTrackerClientLibrary.Services;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -23,7 +24,9 @@ public class SignInViewModel : ValidatableViewModel
     [Reactive] public bool LoginOrPasswordIsInvalid { get; private set; }
     [Reactive] public bool IsSigningIn { get; private set; }
 
-    private readonly ClientService _clientService = new();
+    [Reactive] public bool RememberMe { get; set; }
+
+    private readonly SignInModel _model = new();
 
     public SignInViewModel()
     {
@@ -46,11 +49,8 @@ public class SignInViewModel : ValidatableViewModel
         this.WhenAnyValue(
                 x => x.Login,
                 x => x.Password)
-            .Subscribe(tuple =>
-            {
-                LoginOrPasswordIsInvalid = false;
-            });
-        
+            .Subscribe(_ => { LoginOrPasswordIsInvalid = false; });
+
         var canSignIn = this.WhenAnyValue(
             x => x.IsSigningIn,
             isSigningIn => !isSigningIn);
@@ -60,12 +60,33 @@ public class SignInViewModel : ValidatableViewModel
             IsSigningIn = true;
             LoginBegin?.Invoke();
 
-            IsAuthorized = await _clientService.LoginAccount(Login, Password);
+            IsAuthorized = await _model.SignInAsync(Login, Password, RememberMe);
             LoginOrPasswordIsInvalid = !IsAuthorized;
 
             LoginEnd?.Invoke();
             IsSigningIn = false;
         }, canSignIn);
+
+        TryAutoSignIn();
+    }
+
+    private async void TryAutoSignIn()
+    {
+        if (!SignInModel.TryGetCredentials(out string token, out string login))
+            return;
+
+        Login = login;
+        Password = "placeholder"; // We don't have actual password so just but something for look
+        RememberMe = true;
+
+        LoginBegin?.Invoke();
+        IsSigningIn = true;
+
+        IsAuthorized = await _model.ValidateAndSetToken(token);
+        LoginOrPasswordIsInvalid = !IsAuthorized;
+
+        LoginEnd?.Invoke();
+        IsSigningIn = false;
     }
 
     public void SignUp()

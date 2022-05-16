@@ -92,7 +92,7 @@ public class SignUpViewModel : ValidatableViewModel
             IsCreating = true;
             LoginBegin?.Invoke();
             
-            CreateStatus = await _clientService.CreateAccount(new CreateAccountRequest()
+            CreateStatus = await _clientService.CreateAccountAsync(new CreateAccountRequest()
             {
                 Login = Login,
                 Password = Password

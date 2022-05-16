@@ -14,9 +14,9 @@ public class MapPointToMapLineConverter : IValueConverter
 {
     public IPen Pen { get; set; }
 
-    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var points = (value as IEnumerable<MapPoint>).ToList();
+        var points = (value as IEnumerable<MapPoint>)!.ToList();
 
         var lines = new AvaloniaList<MapLine>();
 
@@ -28,7 +28,7 @@ public class MapPointToMapLineConverter : IValueConverter
         return lines;
     }
 
-    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         return null;
     }

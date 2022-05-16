@@ -10,19 +10,6 @@ public partial class SignInView : UserControl
     public SignInView()
     {
         InitializeComponent();
-
-        DataContextChanged += OnDataContextChanged;
-    }
-
-    private void OnDataContextChanged(object sender, EventArgs e)
-    {
-        if (DataContext is not SignInViewModel vm)
-            return;
-
-        vm.LoginEnd += () =>
-        {
-            
-        };
     }
 
     private void InitializeComponent()

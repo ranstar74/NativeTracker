@@ -27,19 +27,28 @@
                      PasswordChar="*"
                      Text="{Binding Password}" />
 
-            <WrapPanel HorizontalAlignment="Right">
+            <DockPanel LastChildFill="False">
                 
-                <Button Content="Sign Up"
-                        Margin="0, 0, 10, 0"
-                        Command="{Binding SignUp}">
-                </Button>
+                <CheckBox IsChecked="{Binding RememberMe}"
+                          Content="Remember Me"
+                          DockPanel.Dock="Left"/>
+
+                <WrapPanel DockPanel.Dock="Right">
                 
-                <Button x:Name="LoginButton"
-                        Content="Sign In"
-                        Command="{Binding SignInCommand}"
-                        IsDefault="True"/>
+                    <Button Content="Sign Up"
+                            Margin="0, 0, 10, 0"
+                            Command="{Binding SignUp}">
+                    </Button>
                 
-            </WrapPanel>
+                    <Button x:Name="LoginButton"
+                            Content="Sign In"
+                            Classes="accent"
+                            Command="{Binding SignInCommand}"
+                            IsDefault="True"/>
+                
+                </WrapPanel>
+            </DockPanel>
+            
         </StackPanel>
     </Panel>
     
