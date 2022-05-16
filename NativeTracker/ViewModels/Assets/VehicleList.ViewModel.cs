@@ -18,7 +18,10 @@ public class VehicleListViewModel : ViewModel
 {
     public AvaloniaList<GetVehiclesResponse> Vehicles { get; } = new();
 
+    [Reactive] public GetVehiclesResponse SelectedVehicle { get; set; }
+
     public ICommand AddVehicleCommand { get; }
+    public ICommand EditVehicleCommand { get; }
     public ICommand RefreshCommand { get; }
 
     [Reactive] public bool IsUpdating { get; set; }
@@ -39,16 +42,27 @@ public class VehicleListViewModel : ViewModel
 
             await Update();
         });
+        //
+        // EditVehicleCommand = ReactiveCommand.Create(async () =>
+        // {
+        //     var addVm = await Interactions.EditVehicleInteraction.Handle(new VehicleAddViewModel());
+        //
+        //     await _vehicleService.AddVehicle(new AddVehicleRequest()
+        //     {
+        //         Name = addVm.Name,
+        //         Photo = ByteString.CopyFrom(addVm.Photo)
+        //     });
+        //
+        //     await Update();
+        // });
+
 
         var canRefresh = this.WhenAnyValue(
             x => x.IsUpdating,
             isUpdating => !isUpdating);
 
-        RefreshCommand = ReactiveCommand.CreateFromTask(async () =>
-        {
-            await Update();
-        }, canRefresh);
-        
+        RefreshCommand = ReactiveCommand.CreateFromTask(async () => { await Update(); }, canRefresh);
+
         _ = Update();
     }
 
@@ -56,9 +70,9 @@ public class VehicleListViewModel : ViewModel
     {
         if (!await CredentialsManager.IsAuthorized())
             return;
-        
+
         IsUpdating = true;
-        
+
         Vehicles.Clear();
         await foreach (var vehicle in _vehicleService.GetVehicles())
         {

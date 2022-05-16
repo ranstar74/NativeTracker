@@ -9,11 +9,7 @@
     <TabControl TabStripPlacement="Left">
         
         <TabItem Header="Vehicles">
-            <assets:VehiclesView>
-                <assets:VehiclesView.DataContext>
-                    <assetsvms:VehicleListViewModel/>
-                </assets:VehiclesView.DataContext>
-            </assets:VehiclesView>
+            <assets:VehiclesView/>
         </TabItem>
         
         <TabItem Header="Routes">
