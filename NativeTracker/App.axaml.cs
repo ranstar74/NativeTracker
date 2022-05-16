@@ -2,7 +2,9 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using NativeTracker.ViewModels;
+using NativeTracker.ViewModels.Guest;
 using NativeTracker.Views;
+using NativeTracker.Views.Guest;
 
 namespace NativeTracker
 {
@@ -17,10 +19,7 @@ namespace NativeTracker
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainWindowViewModel(),
-                };
+                desktop.MainWindow = new LoginWindow();
             }
 
             base.OnFrameworkInitializationCompleted();

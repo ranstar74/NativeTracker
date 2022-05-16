@@ -1,0 +1,46 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:guest="clr-namespace:NativeTracker.ViewModels.Guest"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NativeTracker.Views.Guest.SignInView">
+    
+    <Design.DataContext>
+        <guest:SignInViewModel />
+    </Design.DataContext>
+
+    <Panel>
+        <StackPanel Margin="40"
+                    Spacing="12"
+                    Width="300"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Image Source="/Assets/nativeTrackLogo.png"/>
+            
+            <TextBox Watermark="Login"
+                     UseFloatingWatermark="True"
+                     Text="{Binding Login}" />
+
+            <TextBox Watermark="Password"
+                     UseFloatingWatermark="True"
+                     PasswordChar="*"
+                     Text="{Binding Password}" />
+
+            <WrapPanel HorizontalAlignment="Right">
+                
+                <Button Content="Sign Up"
+                        Margin="0, 0, 10, 0"
+                        Command="{Binding SignUp}">
+                </Button>
+                
+                <Button x:Name="LoginButton"
+                        Content="Sign In"
+                        Command="{Binding SignInCommand}"
+                        IsDefault="True"/>
+                
+            </WrapPanel>
+        </StackPanel>
+    </Panel>
+    
+</UserControl>

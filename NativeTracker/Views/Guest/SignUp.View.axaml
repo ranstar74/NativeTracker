@@ -1,0 +1,51 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:guest="clr-namespace:NativeTracker.ViewModels.Guest"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NativeTracker.Views.Guest.SignUpView">
+
+    <Design.DataContext>
+        <guest:SignUpViewModel />
+    </Design.DataContext>
+
+    <Panel>
+        <StackPanel Margin="40"
+                    Spacing="12"
+                    Width="300"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <Image Source="/Assets/nativeTrackLogo.png"/>
+            
+            <TextBox Watermark="Login"
+                     UseFloatingWatermark="True"
+                     Text="{Binding Login}" />
+
+            <TextBox Watermark="Password"
+                     UseFloatingWatermark="True"
+                     PasswordChar="*"
+                     Text="{Binding Password}"/>
+
+                <TextBox Watermark="Confirm Password"
+                         UseFloatingWatermark="True"
+                         PasswordChar="*"
+                         Text="{Binding ConfirmPassword}" />
+            
+            <WrapPanel HorizontalAlignment="Right">
+                
+                <Button x:Name="CancelButton"
+                        Margin="0, 0, 10, 0"
+                        Content="Cancel"
+                        HorizontalAlignment="Right"
+                        Command="{Binding Cancel}"/>
+                
+                <Button x:Name="CreateButton"
+                        Content="Continue"
+                        Command="{Binding CreateAccountCommand}"
+                        IsDefault="True"/>
+                
+            </WrapPanel>
+        </StackPanel>
+    </Panel>
+</UserControl>

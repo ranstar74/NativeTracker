@@ -2,6 +2,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using NativeTracker.ViewModels;
+using ReactiveUI.Validation.Helpers;
 
 namespace NativeTracker
 {
@@ -14,7 +15,9 @@ namespace NativeTracker
 
             if (type != null)
             {
-                return (Control)Activator.CreateInstance(type)!;
+                var view = (Control)Activator.CreateInstance(type)!;
+                view.DataContext = data;
+                return view;
             }
             else
             {
@@ -24,7 +27,7 @@ namespace NativeTracker
 
         public bool Match(object data)
         {
-            return data is ViewModelBase;
+            return data is ViewModel or ReactiveValidationObject;
         }
     }
 }
