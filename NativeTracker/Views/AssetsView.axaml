@@ -7,7 +7,7 @@
              x:Class="NativeTracker.Views.AssetsView">
     <TabControl TabStripPlacement="Left">
         <TabItem Header="Vehicles">
-            <assets:VehicleListView />
+            <assets:VehiclesView />
         </TabItem>
         <TabItem Header="Routes">
             

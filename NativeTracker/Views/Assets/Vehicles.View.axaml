@@ -1,0 +1,50 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:assets="clr-namespace:NativeTracker.ViewModels.Assets"
+             xmlns:nativeTrackerClientService="clr-namespace:nativeTrackerClientService;assembly=nativeTrackerClientLibrary"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NativeTracker.Views.Assets.VehiclesView">
+
+    <Design.DataContext>
+        <assets:VehicleListViewModel>
+            <assets:VehicleListViewModel.Vehicles>
+                <nativeTrackerClientService:GetVehiclesResponse Name="DAF XF105" />
+                <nativeTrackerClientService:GetVehiclesResponse Name="DAF XF Euro 6" />
+                <nativeTrackerClientService:GetVehiclesResponse Name="MAN TGX Euro 6" />
+                <nativeTrackerClientService:GetVehiclesResponse Name="Renault Magnum" />
+                <nativeTrackerClientService:GetVehiclesResponse Name="Volvo FH16 2012" />
+            </assets:VehicleListViewModel.Vehicles>
+        </assets:VehicleListViewModel>
+    </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto, *">
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Classes="accent" Command="{Binding AddVehicleCommand}">
+                <PathIcon Data="{StaticResource add_square_regular}" />
+            </Button>
+            <Button>
+                <PathIcon Data="{StaticResource edit_regular}" />
+            </Button>
+            <Button>
+                <PathIcon Data="{StaticResource delete_regular}" />
+            </Button>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1"
+                  Items="{Binding Vehicles}"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTemplateColumn Header="Image">
+                    <DataTemplate>
+                        <Image />
+                    </DataTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+
+</UserControl>
