@@ -1,14 +1,17 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace NativeTracker.Views;
+namespace NativeTracker.Views.Assets;
 
-public partial class AssetsView : UserControl
+public partial class TrackModelsWindow : Window
 {
-    public AssetsView()
+    public TrackModelsWindow()
     {
         InitializeComponent();
+#if DEBUG
+        this.AttachDevTools();
+#endif
     }
 
     private void InitializeComponent()

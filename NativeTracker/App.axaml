@@ -10,6 +10,7 @@
 
     <Application.Resources>
         <converters:ByteImageConverter x:Key="ByteImageConverter"/>
+        <converters:CollectionToCommaSeparatedString x:Key="CollectionToCommaSeparatedString"/>
     </Application.Resources>
     
     <Application.Styles>
@@ -28,6 +29,8 @@
         
         <StyleInclude Source="/Styles/VehicleIcon.axaml"/>
         <StyleInclude Source="/Styles/Icons.axaml"/>
-        <StyleInclude Source="/Styles/TabControl.axaml"/>
+        <!-- <StyleInclude Source="/Styles/TabControl.axaml"/> -->
+        
+        <StyleInclude Source="/Controls/SplitTabControl.axaml"/>
     </Application.Styles>
 </Application>

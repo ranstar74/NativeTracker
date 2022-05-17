@@ -19,43 +19,48 @@ public class VehicleListViewModel : ViewModel
     public AvaloniaList<GetVehiclesResponse> Vehicles { get; } = new();
 
     [Reactive] public GetVehiclesResponse SelectedVehicle { get; set; }
+    [Reactive] public bool IsUpdating { get; set; }
 
     public ICommand AddVehicleCommand { get; }
     public ICommand EditVehicleCommand { get; }
     public ICommand RefreshCommand { get; }
 
-    [Reactive] public bool IsUpdating { get; set; }
-
     private readonly VehicleService _vehicleService = new();
 
     public VehicleListViewModel()
     {
-        AddVehicleCommand = ReactiveCommand.Create(async () =>
+        AddVehicleCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            var addVm = await Interactions.AddVehicleInteraction.Handle(Unit.Default);
+            var vehicleAddVm = await Interactions.AddVehicleInteraction.Handle(Unit.Default);
 
+            if (vehicleAddVm == null)
+                return;
+            
             await _vehicleService.AddVehicle(new AddVehicleRequest()
             {
-                Name = addVm.Name,
-                Photo = ByteString.CopyFrom(addVm.Photo)
+                Name = vehicleAddVm.Name,
+                Photo = ByteString.CopyFrom(vehicleAddVm.Photo)
             });
 
             await Update();
         });
-        //
-        // EditVehicleCommand = ReactiveCommand.Create(async () =>
-        // {
-        //     var addVm = await Interactions.EditVehicleInteraction.Handle(new VehicleAddViewModel());
-        //
-        //     await _vehicleService.AddVehicle(new AddVehicleRequest()
-        //     {
-        //         Name = addVm.Name,
-        //         Photo = ByteString.CopyFrom(addVm.Photo)
-        //     });
-        //
-        //     await Update();
-        // });
+    
+        EditVehicleCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var vehicleEditVm = await Interactions.EditVehicleInteraction.Handle(SelectedVehicle);
 
+            if (vehicleEditVm == null)
+                return;
+            
+            await _vehicleService.EditVehicle(new EditVehicleRequest()
+            {
+                Name = vehicleEditVm.Name,
+                Photo = ByteString.CopyFrom(vehicleEditVm.Photo),
+                VehicleHandle = SelectedVehicle.VehicleHandle
+            });
+
+            await Update();
+        });
 
         var canRefresh = this.WhenAnyValue(
             x => x.IsUpdating,

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.OpenStreetMap", ".
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nativeTrackerClientLibrary", "..\nativeTrackerClientLibrary\nativeTrackerClientLibrary\nativeTrackerClientLibrary.csproj", "{EE5EBF5E-4D0F-46EC-9074-9CD477F1F5F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nativeTracker.SharedLibrary", "nativeTracker.SharedLibrary\nativeTracker.SharedLibrary.csproj", "{5ED74245-25B0-4A46-87D5-5557DF7AFCAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,5 +29,9 @@ Global
 		{EE5EBF5E-4D0F-46EC-9074-9CD477F1F5F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE5EBF5E-4D0F-46EC-9074-9CD477F1F5F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE5EBF5E-4D0F-46EC-9074-9CD477F1F5F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ED74245-25B0-4A46-87D5-5557DF7AFCAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ED74245-25B0-4A46-87D5-5557DF7AFCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ED74245-25B0-4A46-87D5-5557DF7AFCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ED74245-25B0-4A46-87D5-5557DF7AFCAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

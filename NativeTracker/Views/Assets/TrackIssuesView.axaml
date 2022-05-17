@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:assets="clr-namespace:NativeTracker.ViewModels.Assets"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="NativeTracker.Views.Assets.TrackIssuesView">
+
+    <UserControl.DataContext>
+        <assets:IssuesViewModel />
+    </UserControl.DataContext>
+
+    <Grid RowDefinitions="Auto, *">
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Content="Создать заявку" Command="{Binding CreateIssueCommand}"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1"
+                  Items="{Binding Issues}">
+            <DataGrid.Columns>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+
+</UserControl>

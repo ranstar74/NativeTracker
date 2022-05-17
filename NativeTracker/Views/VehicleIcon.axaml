@@ -2,9 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModels="clr-namespace:NativeTracker.ViewModels"
-             xmlns:dd="clr-namespace:NativeTracker.DesignData"
-             d:DataContext="{x:Static dd:DesignData.Vehicle}"
+             xmlns:designData="clr-namespace:NativeTracker.DesignData"
+             d:DataContext="{x:Static designData:DesignData.Vehicle}"
              d:DesignWidth="250"
              d:DesignHeight="250"
              mc:Ignorable="d"
@@ -15,9 +14,9 @@
             <Button.Flyout>
                 <Flyout Placement="Bottom">
                     <StackPanel Spacing="6">
-                        <TextBlock Text="Name:" Foreground="Gray"/>
-                        <TextBlock Text="{Binding Name}"/>
-                        <TextBlock Text="Position:" Foreground="Gray"/>
+                        <TextBlock Text="Name:" Foreground="Gray" />
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="Position:" Foreground="Gray" />
                         <TextBlock Text="{Binding Position}" />
                     </StackPanel>
                 </Flyout>

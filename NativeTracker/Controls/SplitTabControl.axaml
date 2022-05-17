@@ -1,0 +1,75 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:NativeTracker.Controls">
+    <Design.PreviewWith>
+        <controls:SplitTabControl
+            Width="800"
+            Height="600">
+            <TabItem Header="Main">
+                <Panel Background="Red">
+                    <TextBlock Text="Tab Content"
+                               FontSize="24"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" />
+                </Panel>
+            </TabItem>
+            <TabItem Header="Secondary" />
+
+            <controls:SplitTabControl.Content>
+                <Panel Background="Blue">
+                    <TextBlock Text="Content"
+                               FontSize="24"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center" />
+                </Panel>
+            </controls:SplitTabControl.Content>
+
+        </controls:SplitTabControl>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|SplitTabControl">
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        Background="{TemplateBinding Background}"
+                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                        VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                    <DockPanel LastChildFill="True">
+
+                        <ItemsPresenter DockPanel.Dock="Top"
+                                        Name="PART_ItemsPresenter"
+                                        Items="{TemplateBinding Items}"
+                                        ItemsPanel="{TemplateBinding ItemsPanel}"
+                                        ItemTemplate="{TemplateBinding ItemTemplate}">
+                        </ItemsPresenter>
+
+                        <SplitView DockPanel.Dock="Bottom"
+                                   DisplayMode="Inline"
+                                   IsPaneOpen="True">
+                            <SplitView.Pane>
+
+                                <!-- Selected Tab Content -->
+                                <ContentPresenter
+                                    Name="PART_SelectedContentHost"
+                                    Margin="{TemplateBinding Padding}"
+                                    Content="{TemplateBinding SelectedContent}"
+                                    ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+                                </ContentPresenter>
+
+                            </SplitView.Pane>
+
+                            <!-- Permanent Content -->
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+
+                        </SplitView>
+
+                    </DockPanel>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>
