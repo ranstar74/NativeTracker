@@ -2,22 +2,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:NativeTracker"
              xmlns:converters="clr-namespace:NativeTracker.Converters"
+             xmlns:protobuf="clr-namespace:Google.Protobuf;assembly=Google.Protobuf"
              x:Class="NativeTracker.App">
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
 
     <Application.Resources>
-        <converters:ByteToImageConverter x:Key="ByteToImageConverter"/>
+        <converters:ByteImageConverter x:Key="ByteImageConverter"/>
     </Application.Resources>
     
     <Application.Styles>
-        <FluentTheme Mode="Light"/>
+        <!-- <FluentTheme Mode="Light"/> -->
+        <!-- <StyleInclude Source="avares://Avalonia.Controls.Default/Base.xaml"/> -->
+        <!-- <StyleInclude Source="avares://Avalonia.Controls.Default/BaseLight.xaml"/> -->
+        <!-- <StyleInclude Source="avares://Avalonia.Controls.Default/DefaultTheme.xaml"/> -->
+        <!-- -->
+        <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
+        <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
         
-        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+        
+        <!-- <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/> -->
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Default.xaml"/>
         <StyleInclude Source="avares://Avalonia.OpenStreetMap/Control.Map/MapControl.axaml"/>
         
         <StyleInclude Source="/Styles/VehicleIcon.axaml"/>
         <StyleInclude Source="/Styles/Icons.axaml"/>
+        <StyleInclude Source="/Styles/TabControl.axaml"/>
     </Application.Styles>
 </Application>

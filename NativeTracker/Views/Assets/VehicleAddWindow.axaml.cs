@@ -19,9 +19,9 @@ public partial class VehicleAddWindow : ReactiveWindow<VehicleAddViewModel>
     public VehicleAddWindow()
     {
         InitializeComponent();
-#if DEBUG
-        this.AttachDevTools();
-#endif
+// #if DEBUG
+//         this.AttachDevTools();
+// #endif
 
         _filters = new List<FileDialogFilter>()
         {

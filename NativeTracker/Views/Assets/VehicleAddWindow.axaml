@@ -2,37 +2,75 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
         xmlns:assets="clr-namespace:NativeTracker.ViewModels.Assets"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="NativeTracker.Views.Assets.VehicleAddWindow"
+
         Title="Add or Edit Vehicle"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner">
 
-    <Design.DataContext>
+    <Window.DataContext>
         <assets:VehicleAddViewModel />
-    </Design.DataContext>
+    </Window.DataContext>
 
     <StackPanel Spacing="8"
-                Width="300"
+                Width="500"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center">
-        <TextBox Watermark="Name" Text="{Binding Name}" />
-        <DockPanel>
-            <Button Content="Browse Photo"
-                    DockPanel.Dock="Left"
-                    Command="{Binding BrowsePhotoCommand}" />
-            <Image DockPanel.Dock="Right"
-                   Source="{Binding Photo, 
-                   Converter={StaticResource ByteToImageConverter}}" />
-        </DockPanel>
+        <Grid ColumnDefinitions="0.8*, 1*">
+            <!-- <Button Content="Browse Photo" -->
+            <!--         DockPanel.Dock="Left" -->
+            <!--         Command="{Binding BrowsePhotoCommand}" /> -->
 
-        <WrapPanel HorizontalAlignment="Left">
-            <Button Content="Cancel"
+            <Border Grid.Column="0"
+                    BorderBrush="#D2D2D2"
+                    BorderThickness="1"
                     Margin="0, 0, 10, 0"
+
+                    MinHeight="130">
+
+                <Panel>
+
+                    <TextBlock Text="Pick a photo..."
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Cursor="Hand" />
+                    <Image Source="{Binding Photo, 
+                Converter={StaticResource ByteImageConverter}}" />
+                    <Panel Background="White"
+                           Opacity="0.01">
+                        <i:Interaction.Behaviors>
+                            <ia:EventTriggerBehavior EventName="PointerPressed"
+                                                     SourceObject="{Binding $self}">
+                                <ia:InvokeCommandAction Command="{Binding BrowsePhotoCommand}" />
+                            </ia:EventTriggerBehavior>
+                        </i:Interaction.Behaviors>
+                    </Panel>
+                </Panel>
+
+            </Border>
+
+            <TabControl Grid.Column="1">
+                <TabItem Header="Main">
+                    <StackPanel>
+                        <TextBox Watermark="Name" Text="{Binding Name}" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+        </Grid>
+
+        <WrapPanel HorizontalAlignment="Right">
+            <Button Content="Apply"
+                    Command="{Binding SaveCommand}"
+                    Margin="0, 0, 10, 0" />
+            <Button Content="Cancel"
                     Command="{Binding CancelCommand}" />
-            <Button Content="Apply" Command="{Binding SaveCommand}" />
         </WrapPanel>
+
     </StackPanel>
 
 </Window>
